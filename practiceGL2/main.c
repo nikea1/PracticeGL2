@@ -8,18 +8,14 @@
 
 #include <stdio.h>
 #include <GLUT/glut.h>
+#include "GameWindow.h"
 
-#define SCREEN_WIDTH 84
-#define SCREEN_HEIGHT 48
-#define MODIFIER 5
-
-int display_width = SCREEN_WIDTH*MODIFIER;
-int display_height = SCREEN_HEIGHT*MODIFIER;
+GameWindow *gw;
 
 void processNormalKeys(unsigned char ch, int xx, int yy){
     switch(ch){
         case 27:
-            //deconstructGameWindow(gw);
+            destroyGameWindow(gw);
             exit(1);
             break;
             
@@ -29,12 +25,16 @@ void processNormalKeys(unsigned char ch, int xx, int yy){
 
 int main(int argc, const char * argv[]) {
     
+    
     glutInit(&argc, argv);
     glutInitWindowSize(display_width, display_height);
     glutInitWindowPosition(320, 320);
     glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE|GLUT_DEPTH);
     glutCreateWindow("Practice2");
     
+    gw = initGameWindow();
+    
+    glutDisplayFunc(*(gw->render));
     glutKeyboardFunc(processNormalKeys);
     printf("Hello, World!\n");
     

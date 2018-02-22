@@ -13,6 +13,13 @@
 #include <stdlib.h>
 #include <GLUT/GLUT.h>
 
+#define SCREEN_WIDTH 84
+#define SCREEN_HEIGHT 48
+#define MODIFIER 5
+
+static int display_width = SCREEN_WIDTH*MODIFIER;
+static int display_height = SCREEN_HEIGHT*MODIFIER;
+
 typedef struct {
     void (*render)(void);
     void (*update)(void);
