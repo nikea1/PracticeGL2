@@ -25,19 +25,23 @@ void processNormalKeys(unsigned char ch, int xx, int yy){
 
 int main(int argc, const char * argv[]) {
     
-    
+    //initialize window through GLUT
     glutInit(&argc, argv);
     glutInitWindowSize(display_width, display_height);
     glutInitWindowPosition(320, 320);
     glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE|GLUT_DEPTH);
     glutCreateWindow("Practice2");
     
+    //load GameWindow struct
     gw = initGameWindow();
     
+    //start define render function
     glutDisplayFunc(*(gw->render));
+    //define button commands
     glutKeyboardFunc(processNormalKeys);
     printf("Hello, World!\n");
     
+    //run glut loop
     glutMainLoop();
     return 0;
 }

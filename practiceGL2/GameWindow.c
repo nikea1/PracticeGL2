@@ -11,11 +11,13 @@
 GLuint _GWtextureBufferID;
 GLuint _GWvertexBufferID;
 
+//vertex struct
 typedef struct{
     GLfloat pos[3];
     GLfloat tex[2];
 } VertexData;
 
+//vertex data for a square {(x,y,x), (u,v)}
 VertexData vertices[] = {
     {{  0.0f,   0.0f, 0.0f}, {0.0, 0.0}},
     {{  0.0f, 100.0f, 0.0f}, {0.0, 1.0}},
@@ -23,6 +25,7 @@ VertexData vertices[] = {
     {{100.0f,   0.0f, 0.0f}, {1.0, 0.0}}
 };
 
+//load image into texture
 GLuint loadAndBufferImage(char const *filename){
     
     GLuint texture = 0;
@@ -55,17 +58,19 @@ GLuint loadAndBufferImage(char const *filename){
     return texture;
 }
 
+//rendering function
 void gamewindowRender(){
     glClear(GL_COLOR_BUFFER_BIT);
     
     //Draw your stuff here
     //Note: (0,0) is center of window
     //without adjustments to view window
-    glColor3f(1.0f, 0.0f, 0.0f);
+    glColor3f(1.0f, 1.0f, 0.0f);
     
-    glDrawArrays(GL_QUADS, 0, 4);
+    //glDrawArrays(GL_QUADS, 0, 4);
     
     /*
+    //can color individual points with this
     glBegin(GL_QUADS);
     glVertex2f(0.0f, 0.0f);
     glVertex2f(0.0f, 100.0f);
@@ -79,10 +84,12 @@ void gamewindowRender(){
     glutSwapBuffers();
 }
 
+//update function
 void gamewindowUpdate(){
     
 }
 
+//initialize gamewindow struct information
 GameWindow *initGameWindow(){
     GameWindow *gw = malloc(sizeof(*gw));
     
@@ -91,6 +98,8 @@ GameWindow *initGameWindow(){
     //end of initializing Game Window struct
     
     //begin initiallizing OPENGL
+    
+    //clears the screen with white background
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     
     //Adjust view window
@@ -104,12 +113,14 @@ GameWindow *initGameWindow(){
     glBindBuffer(GL_ARRAY_BUFFER, _GWvertexBufferID);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     
+    //enable vertex array
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, sizeof(VertexData), (GLvoid *)offsetof(VertexData, pos));
     
     return gw;
 }
 
+//destroy struct
 void destroyGameWindow(GameWindow *gw){
     free(gw);
 }
