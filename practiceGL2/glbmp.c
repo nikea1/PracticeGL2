@@ -24,7 +24,7 @@ glBMP initGLBMP(const char* input){
     int test2;
     
     //open file
-    fp = fopen(input,"rb+");
+    fp = fopen(input,"rb");
     if(fp == NULL){
         printf("File failed to open\n");
         exit(EXIT_FAILURE);
@@ -71,7 +71,7 @@ glBMP initGLBMP(const char* input){
         test = ((out.width)*(test2)+31)/32*4*(out.height);
     }
     
-    out.pixelData = malloc(sizeof(test));
+    out.pixelData = malloc(sizeof(char)*test);
     if(out.pixelData == NULL){
         printf("Out of memory\n");
         exit(EXIT_FAILURE);
@@ -80,6 +80,7 @@ glBMP initGLBMP(const char* input){
     
     //get width and height
     fseek(fp, offset, SEEK_SET);
+  
     if(fread(out.pixelData,1, test, fp) != test){
         printf("Something went horrible wrong in getting pixel data! Abort abort!\n");
         exit(EXIT_FAILURE);

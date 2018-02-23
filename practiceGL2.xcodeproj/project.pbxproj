@@ -11,6 +11,7 @@
 		521A32B51F9C0E9D0035C4B3 /* GameWindow.c in Sources */ = {isa = PBXBuildFile; fileRef = 521A32B31F9C0E9D0035C4B3 /* GameWindow.c */; };
 		52A65DDE203F859F00ECF222 /* glbmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 52A65DDD203F859F00ECF222 /* glbmp.c */; };
 		52A65DE1203FC7E100ECF222 /* alpha.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 52A65DDF203FC78C00ECF222 /* alpha.bmp */; };
+		52A65DE2203FEBE100ECF222 /* testA.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 521A32B21F9C0B8C0035C4B3 /* testA.bmp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -20,6 +21,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				52A65DE2203FEBE100ECF222 /* testA.bmp in CopyFiles */,
 				52A65DE1203FC7E100ECF222 /* alpha.bmp in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
