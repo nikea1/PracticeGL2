@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-glBMP initGLBMP(char* input){
+glBMP initGLBMP(const char* input){
     //check if string is right
     
     FILE *fp;
@@ -95,6 +95,7 @@ glBMP initGLBMP(char* input){
         }//end of for loop
     }//end of if statement
     
+    fclose(fp);
     //return struct
     return out;
 }

@@ -18,7 +18,7 @@ typedef struct {
     unsigned char* pixelData;
 }glBMP;
 
-glBMP initGLBMP(char*);
+glBMP initGLBMP(const char*);
 
 
 #endif /* glbmp_h */

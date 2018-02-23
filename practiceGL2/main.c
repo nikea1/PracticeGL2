@@ -16,7 +16,7 @@ void processNormalKeys(unsigned char ch, int xx, int yy){
     switch(ch){
         case 27:
             destroyGameWindow(gw);
-            exit(1);
+            exit(0);
             break;
             
             

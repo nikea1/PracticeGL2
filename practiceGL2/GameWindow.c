@@ -7,9 +7,12 @@
 //
 
 #include "GameWindow.h"
+#include "glbmp.h"
+
 
 GLuint _GWtextureBufferID;
 GLuint _GWvertexBufferID;
+
 
 //vertex struct
 typedef struct{
@@ -26,36 +29,25 @@ VertexData vertices[] = {
 };
 
 //load image into texture
-GLuint loadAndBufferImage(char const *filename){
+GLuint loadAndBufferImage(const char *filename){
+    GLuint texture;
+    glBMP img = initGLBMP(filename);
+
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img.width, img.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, img.pixelData);
     
-    GLuint texture = 0;
-    FILE *image;
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     
-    unsigned char header[0x46];
-    int dataPos; //where the color data starts
-    int width,height;   //width and height of image
-    int imageSize;  //total image size
-    int nColorBit;
-    int alphaMask;
-    unsigned char *imageData;
-    
-    image = fopen(filename, "rb");
-    
-    if(image == NULL){
-        printf("File failed to open. \n");
-        exit(1);
-    }
-    
-    if(fread(header, 1, 0x46, image) != 0x46)
-    {
-        printf("<#const char *restrict, ...#>");
-    }
-    
-    
-    
-    fclose(image);
-    
+    //free(data);
+    free(img.pixelData);
     return texture;
+ 
+    
+   
 }
 
 //rendering function
@@ -65,9 +57,9 @@ void gamewindowRender(){
     //Draw your stuff here
     //Note: (0,0) is center of window
     //without adjustments to view window
-    glColor3f(1.0f, 1.0f, 0.0f);
+    //glColor3f(1.0f, 0.0f, 0.0f);
     
-    //glDrawArrays(GL_QUADS, 0, 4);
+    glDrawArrays(GL_QUADS, 0, 4);
     
     /*
     //can color individual points with this
@@ -102,6 +94,10 @@ GameWindow *initGameWindow(){
     //clears the screen with white background
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
     //Adjust view window
     glMatrixMode(GL_PROJECTION);
     //ortho2d shifts 2D plain view
@@ -116,6 +112,11 @@ GameWindow *initGameWindow(){
     //enable vertex array
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, sizeof(VertexData), (GLvoid *)offsetof(VertexData, pos));
+    
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glTexCoordPointer(2, GL_FLOAT, sizeof(VertexData), (GLvoid *)offsetof(VertexData, tex));
+    
+    _GWtextureBufferID = loadAndBufferImage("alpha.bmp");
     
     return gw;
 }
