@@ -124,8 +124,10 @@ GameWindow *initGameWindow(){
     glTexCoordPointer(2, GL_FLOAT, sizeof(VertexData), (GLvoid *)offsetof(VertexData, tex));
     
     _GWtextureBufferID = loadAndBufferImage("testA.bmp");
-    
-    monster = initSprite(_GWtextureBufferID);
+    Vector2 monsterPosition;
+    monsterPosition.x = 42;
+    monsterPosition.y = 24;
+    monster = initSprite(_GWtextureBufferID, monsterPosition);
     
     return gw;
 }

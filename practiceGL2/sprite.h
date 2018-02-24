@@ -26,7 +26,7 @@ typedef struct{
     
 } Sprite;
 
-Sprite *initSprite(GLuint);
+Sprite *initSprite(GLuint, Vector2);
 void destroySprite(Sprite *);
 
 

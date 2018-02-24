@@ -22,6 +22,10 @@ Vector2 spriteGetPosition(){
 void spriteRender(){
     glBindBuffer(GL_TEXTURE_2D, _spriteTextureBufferID);
     
+    glLoadIdentity();
+    
+    glTranslatef(_spritePosition.x, _spritePosition.y, 0);
+    
     glDrawArrays(GL_QUADS, 0, 4);
 }
 
@@ -29,7 +33,7 @@ void spriteUpdate(){
     
 }
 
-Sprite *initSprite(GLuint textureBufferID){
+Sprite *initSprite(GLuint textureBufferID, Vector2 position){
     Sprite *out = NULL;
     out = malloc(sizeof(*out));
     
@@ -42,6 +46,7 @@ Sprite *initSprite(GLuint textureBufferID){
     out->render = spriteRender;
     out->update = spriteUpdate;
     _spriteTextureBufferID = textureBufferID;
+    _spritePosition = position;
     
     return out;
 }
