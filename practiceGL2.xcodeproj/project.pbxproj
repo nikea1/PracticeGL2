@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		521A32A91F9C0B080035C4B3 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 521A32A81F9C0B080035C4B3 /* main.c */; };
 		521A32B51F9C0E9D0035C4B3 /* GameWindow.c in Sources */ = {isa = PBXBuildFile; fileRef = 521A32B31F9C0E9D0035C4B3 /* GameWindow.c */; };
+		52573A642040CA2300C9EBBE /* sprite.c in Sources */ = {isa = PBXBuildFile; fileRef = 52573A622040CA2300C9EBBE /* sprite.c */; };
 		52A65DDE203F859F00ECF222 /* glbmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 52A65DDD203F859F00ECF222 /* glbmp.c */; };
 		52A65DE1203FC7E100ECF222 /* alpha.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 52A65DDF203FC78C00ECF222 /* alpha.bmp */; };
 		52A65DE2203FEBE100ECF222 /* testA.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 521A32B21F9C0B8C0035C4B3 /* testA.bmp */; };
@@ -35,6 +36,8 @@
 		521A32B21F9C0B8C0035C4B3 /* testA.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = testA.bmp; sourceTree = "<group>"; };
 		521A32B31F9C0E9D0035C4B3 /* GameWindow.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GameWindow.c; sourceTree = "<group>"; };
 		521A32B41F9C0E9D0035C4B3 /* GameWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameWindow.h; sourceTree = "<group>"; };
+		52573A622040CA2300C9EBBE /* sprite.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sprite.c; sourceTree = "<group>"; };
+		52573A632040CA2300C9EBBE /* sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite.h; sourceTree = "<group>"; };
 		52A65DDC203F859E00ECF222 /* glbmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glbmp.h; sourceTree = "<group>"; };
 		52A65DDD203F859F00ECF222 /* glbmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glbmp.c; sourceTree = "<group>"; };
 		52A65DDF203FC78C00ECF222 /* alpha.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = alpha.bmp; sourceTree = "<group>"; };
@@ -74,10 +77,11 @@
 			children = (
 				52A65DDD203F859F00ECF222 /* glbmp.c */,
 				52A65DDC203F859E00ECF222 /* glbmp.h */,
-				52A65DDF203FC78C00ECF222 /* alpha.bmp */,
 				521A32A81F9C0B080035C4B3 /* main.c */,
 				521A32B31F9C0E9D0035C4B3 /* GameWindow.c */,
 				521A32B41F9C0E9D0035C4B3 /* GameWindow.h */,
+				52573A622040CA2300C9EBBE /* sprite.c */,
+				52573A632040CA2300C9EBBE /* sprite.h */,
 			);
 			path = practiceGL2;
 			sourceTree = "<group>";
@@ -93,6 +97,7 @@
 		521A32B11F9C0B450035C4B3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				52A65DDF203FC78C00ECF222 /* alpha.bmp */,
 				521A32B21F9C0B8C0035C4B3 /* testA.bmp */,
 			);
 			path = Resources;
@@ -155,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52573A642040CA2300C9EBBE /* sprite.c in Sources */,
 				52A65DDE203F859F00ECF222 /* glbmp.c in Sources */,
 				521A32A91F9C0B080035C4B3 /* main.c in Sources */,
 				521A32B51F9C0E9D0035C4B3 /* GameWindow.c in Sources */,

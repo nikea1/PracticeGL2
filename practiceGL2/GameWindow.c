@@ -8,11 +8,12 @@
 
 #include "GameWindow.h"
 #include "glbmp.h"
+#include "sprite.h"
 
 
 GLuint _GWtextureBufferID;
 GLuint _GWvertexBufferID;
-
+Sprite *monster;
 
 //vertex struct
 typedef struct{
@@ -35,9 +36,10 @@ GLuint loadAndBufferImage(const char *filename){
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-    
+    if(img.hasAlpha)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img.width, img.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, img.pixelData);
-        
+    else
+       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.width, img.height, 0, GL_BGR, GL_UNSIGNED_BYTE, img.pixelData);
 
     
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -62,7 +64,9 @@ void gamewindowRender(){
     //without adjustments to view window
     //glColor3f(1.0f, 0.0f, 0.0f);
     
-    glDrawArrays(GL_QUADS, 0, 4);
+    monster->render();
+    
+    //glDrawArrays(GL_QUADS, 0, 4);
     
     /*
     //can color individual points with this
@@ -121,10 +125,13 @@ GameWindow *initGameWindow(){
     
     _GWtextureBufferID = loadAndBufferImage("testA.bmp");
     
+    monster = initSprite(_GWtextureBufferID);
+    
     return gw;
 }
 
 //destroy struct
 void destroyGameWindow(GameWindow *gw){
+    destroySprite(monster);
     free(gw);
 }
