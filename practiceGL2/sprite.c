@@ -10,13 +10,22 @@
 
 GLuint _spriteTextureBufferID;
 Vector2 _spritePosition;
+Vector2 _spriteVelocity;
 
-void spriteSetPosition(Vector2 vec){
-    _spritePosition = vec;
+void spriteSetPosition(Vector2 position){
+    _spritePosition = position;
 }
 
 Vector2 spriteGetPosition(){
     return _spritePosition;
+}
+
+void spriteSetVelocity(Vector2 velocity){
+    _spriteVelocity = velocity;
+}
+
+Vector2 spriteGetVelocity(){
+    return _spriteVelocity;
 }
 
 void spriteRender(){
@@ -30,7 +39,7 @@ void spriteRender(){
 }
 
 void spriteUpdate(){
-    
+    _spritePosition = addVector(_spritePosition, _spriteVelocity);
 }
 
 Sprite *initSprite(GLuint textureBufferID, Vector2 position){
@@ -43,6 +52,8 @@ Sprite *initSprite(GLuint textureBufferID, Vector2 position){
     }
     out->setPosition = spriteSetPosition;
     out->getPosition = spriteGetPosition;
+    out->getVelocity = spriteGetVelocity;
+    out->setVelocity = spriteSetVelocity;
     out->render = spriteRender;
     out->update = spriteUpdate;
     _spriteTextureBufferID = textureBufferID;

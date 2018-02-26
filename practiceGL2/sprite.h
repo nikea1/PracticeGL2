@@ -12,15 +12,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <GLUT/glut.h>
+#include "Vector2.h"
 
-typedef struct{
-    GLfloat x;
-    GLfloat y;
-}Vector2;
 
 typedef struct{
     void (* setPosition)(Vector2);
     Vector2 (* getPosition)(void);
+    void (* setVelocity)(Vector2);
+    Vector2 (* getVelocity)(void);
     void (* render)(void);
     void (* update)(void);
     

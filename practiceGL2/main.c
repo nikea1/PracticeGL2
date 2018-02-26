@@ -38,6 +38,7 @@ int main(int argc, const char * argv[]) {
     
     //start define render function
     glutDisplayFunc(*(gw->render));
+    glutIdleFunc(*(gw->render));
     //define button commands
     glutKeyboardFunc(processNormalKeys);
     printf("Hello, World!\n");

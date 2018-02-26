@@ -55,6 +55,10 @@ GLuint loadAndBufferImage(const char *filename){
    
 }
 
+void gamewindowUpdate(){
+    monster->update();
+}
+
 //rendering function
 void gamewindowRender(){
     glClear(GL_COLOR_BUFFER_BIT);
@@ -64,7 +68,7 @@ void gamewindowRender(){
     //without adjustments to view window
     //glColor3f(1.0f, 0.0f, 0.0f);
     
-    monster->render();
+    
     
     //glDrawArrays(GL_QUADS, 0, 4);
     
@@ -79,14 +83,16 @@ void gamewindowRender(){
     */
     //End of drawing
     
+    monster->render();
+    //gamewindowUpdate();
+    monster->update();
+    
     //swap buffers
     glutSwapBuffers();
 }
 
 //update function
-void gamewindowUpdate(){
-    
-}
+
 
 //initialize gamewindow struct information
 GameWindow *initGameWindow(){
@@ -125,9 +131,10 @@ GameWindow *initGameWindow(){
     
     _GWtextureBufferID = loadAndBufferImage("testA.bmp");
     Vector2 monsterPosition;
-    monsterPosition.x = 42;
-    monsterPosition.y = 24;
+    monsterPosition.x = 0;
+    monsterPosition.y = 0;
     monster = initSprite(_GWtextureBufferID, monsterPosition);
+    monster->setVelocity(makeVector(0.0f, 0.0f));
     
     return gw;
 }
