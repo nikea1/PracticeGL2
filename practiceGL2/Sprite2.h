@@ -23,5 +23,7 @@ typedef struct Sprite2{
 } Sprite2;
 
 Sprite2 *initSprite2(GLuint textureBufferID, Vector2 position);
+
+void destroySprite2(Sprite2 *s);
 /* */
 #endif /* Sprite2_h */

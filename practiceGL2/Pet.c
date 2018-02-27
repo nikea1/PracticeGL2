@@ -7,62 +7,34 @@
 //
 
 #include "Pet.h"
+#include <stdlib.h>
 
-GLuint _petTextureBufferID;
-Vector2 _petPosition;
-Vector2 _petVelocity;
 
-void petSetPosition(Vector2 position){
-    _petPosition = position;
-}
 
-Vector2 petGetPosition(){
-    return _petPosition;
-}
-
-void petSetVelocity(Vector2 velocity){
-    _petVelocity = velocity;
-}
-
-Vector2 petGetVelocity(){
-    return _petVelocity;
-}
-
-void petRender(){
-    glBindBuffer(GL_TEXTURE_2D, _petTextureBufferID);
+void petUpdate(Pet *self){
     
-    glLoadIdentity();
-    
-    glTranslatef(_petPosition.x, _petPosition.y, 0);
-    
-    glDrawArrays(GL_QUADS, 0, 4);
-}
+    //pet moves left and right in window.
+    if(self->sprite->_Position.x <= self->_boundingbox.left || self->sprite->_Position.x >= self->_boundingbox.right){
+         self->sprite->_Velocity.x *= -1.0;
+    }
 
-void petUpdate(){
     
+    self->sprite->update(self->sprite);
 }
 
 Pet *initPet(GLuint textureBufferID, Vector2 position){
     Pet *out = NULL;
     out = malloc(sizeof(*out));
+    out->sprite = initSprite2(textureBufferID, position);
     
-    if(!out){
-        printf("We are already out of memory\n");
-        exit(1);
-    }
-    out->setPosition = petSetPosition;
-    out->getPosition = petGetPosition;
-    out->getVelocity = petGetVelocity;
-    out->setVelocity = petSetVelocity;
-    out->render = petRender;
     out->update = petUpdate;
-    _petTextureBufferID = textureBufferID;
-    _petPosition = position;
+    
+    //out->setBoundingBox = petSetBoundingBox;
     
     return out;
 }
 
-void destroyPet(Pet *p){
-    free(p);
+void destroyPet(Pet* pet){
+    free(pet->sprite);
+    free(pet);
 }
-

@@ -17,8 +17,8 @@
 #define SCREEN_HEIGHT 48
 #define MODIFIER 5
 
-static int display_width = SCREEN_WIDTH*MODIFIER;
-static int display_height = SCREEN_HEIGHT*MODIFIER;
+extern int display_width;
+extern int display_height;
 
 typedef struct {
     void (*render)(void);

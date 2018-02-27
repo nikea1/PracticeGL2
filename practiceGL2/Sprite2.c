@@ -14,7 +14,7 @@ void sprite2Render(Sprite2 *self){
     
     glLoadIdentity();
     
-    glTranslatef(self->_Position.x, self->_Position.y, 0);
+    glTranslatef(self->_Position.x-50, self->_Position.y-50, 0);
     
     glDrawArrays(GL_QUADS, 0, 4);
 }
@@ -37,5 +37,9 @@ Sprite2 *initSprite2(GLuint textureBufferID, Vector2 position){
     
     
     return out;
+}
+
+void destroySprite2(Sprite2 *s){
+    free(s);
 }
 /**/

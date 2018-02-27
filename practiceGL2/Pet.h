@@ -10,25 +10,20 @@
 #define Pet_h
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <GLUT/glut.h>
-#include "Vector2.h"
-
+#include "Sprite2.h"
+#include "BoundingBox.h"
 
 typedef struct Pet{
-    void (* setPosition)(Vector2);
-    Vector2 (* getPosition)(void);
-    void (* setVelocity)(Vector2);
-    Vector2 (* getVelocity)(void);
-    void (* render)(void);
-    void (* update)(void);
+    BoundingBox _boundingbox;
+    Sprite2 *sprite;
+    void (* update)(struct Pet*);
+   
     
-} Pet;
+}Pet;
 
-Pet *initPet(GLuint, Vector2);
-void destroyPet(Pet *);
+Pet *initPet(GLuint textureBufferID, Vector2 position);
 
-
+void destroyPet(Pet*);
 
 
 #endif /* Pet_h */

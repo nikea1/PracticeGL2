@@ -10,12 +10,17 @@
 #include "glbmp.h"
 #include "sprite.h"
 #include "Sprite2.h"
+#include "Pet.h"
 
+ int display_width = SCREEN_WIDTH*MODIFIER;
+ int display_height = SCREEN_HEIGHT*MODIFIER;
 
 GLuint _GWtextureBufferID;
 GLuint _GWvertexBufferID;
 Sprite *monster;
 Sprite2 *monster2;
+Pet *monster3;
+
 
 //vertex struct
 typedef struct{
@@ -92,8 +97,11 @@ void gamewindowRender(){
     //sprite2Render(monster2);
     //sprite2Update(monster2);
     
-    monster2->render(monster2);
-    monster2->update(monster2);
+    //monster2->render(monster2);
+    //monster2->update(monster2);
+    
+    monster3->sprite->render(monster3->sprite);
+    monster3->update(monster3);
     
     //swap buffers
     glutSwapBuffers();
@@ -146,18 +154,27 @@ GameWindow *initGameWindow(){
     monster->setVelocity(makeVector(0.0f, 0.0f));
     */
     
+    /*
     Vector2 monPos;
     monPos.x = 20;
     monPos.y = 20;
-    monster2 = initSprite2(_GWvertexBufferID, monPos);
+    monster2 = initSprite2(_GWtextureBufferID, monPos);
     monster2->_Velocity = makeVector(0.1f, 0.1f);
+    */
     
-    
+    Vector2 monPos;
+    monPos.x = 210;
+    monPos.y = 120;
+    monster3 = initPet(_GWtextureBufferID, monPos);
+    monster3->sprite->_Velocity = makeVector(0.5f, 0.0f);
+    monster3->_boundingbox = makeBoundingBox(display_height, 0, 0, display_width);
     return gw;
 }
 
 //destroy struct
 void destroyGameWindow(GameWindow *gw){
     destroySprite(monster);
+    destroySprite2(monster2);
+    destroyPet(monster3);
     free(gw);
 }
