@@ -9,11 +9,13 @@
 #include "GameWindow.h"
 #include "glbmp.h"
 #include "sprite.h"
+#include "Sprite2.h"
 
 
 GLuint _GWtextureBufferID;
 GLuint _GWvertexBufferID;
 Sprite *monster;
+Sprite2 *monster2;
 
 //vertex struct
 typedef struct{
@@ -83,9 +85,15 @@ void gamewindowRender(){
     */
     //End of drawing
     
-    monster->render();
+    //monster2->render();
     //gamewindowUpdate();
-    monster->update();
+    //monster->update();
+    
+    //sprite2Render(monster2);
+    //sprite2Update(monster2);
+    
+    monster2->render(monster2);
+    monster2->update(monster2);
     
     //swap buffers
     glutSwapBuffers();
@@ -130,11 +138,20 @@ GameWindow *initGameWindow(){
     glTexCoordPointer(2, GL_FLOAT, sizeof(VertexData), (GLvoid *)offsetof(VertexData, tex));
     
     _GWtextureBufferID = loadAndBufferImage("testA.bmp");
+    /*
     Vector2 monsterPosition;
     monsterPosition.x = 0;
     monsterPosition.y = 0;
     monster = initSprite(_GWtextureBufferID, monsterPosition);
     monster->setVelocity(makeVector(0.0f, 0.0f));
+    */
+    
+    Vector2 monPos;
+    monPos.x = 20;
+    monPos.y = 20;
+    monster2 = initSprite2(_GWvertexBufferID, monPos);
+    monster2->_Velocity = makeVector(0.1f, 0.1f);
+    
     
     return gw;
 }

@@ -10,6 +10,8 @@
 #include <GLUT/glut.h>
 #include "GameWindow.h"
 
+
+
 GameWindow *gw;
 
 void processNormalKeys(unsigned char ch, int xx, int yy){
@@ -25,6 +27,8 @@ void processNormalKeys(unsigned char ch, int xx, int yy){
 }
 
 int main(int argc, const char * argv[]) {
+    
+    
     
     //initialize window through GLUT
     glutInit(&argc, argv);

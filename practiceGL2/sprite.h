@@ -15,7 +15,7 @@
 #include "Vector2.h"
 
 
-typedef struct{
+typedef struct Sprite{
     void (* setPosition)(Vector2);
     Vector2 (* getPosition)(void);
     void (* setVelocity)(Vector2);
