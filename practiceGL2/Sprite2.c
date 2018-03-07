@@ -12,11 +12,19 @@
 void sprite2Render(Sprite2 *self){
     glBindBuffer(GL_TEXTURE_2D, self->_TextureBufferID);
     
-    glLoadIdentity();
     
-    glTranslatef(self->_Position.x-50, self->_Position.y-50, 0);
+    //glLoadIdentity();
+    glPushMatrix();
+    glTranslatef(self->_Position.x, self->_Position.y, 0);
+    
+    //turn pet around facing the direction it's moving
+    if(self->_Velocity.x > 0)
+        glRotatef(180.0, 0.0, 1.0, 0.0);
+    
     
     glDrawArrays(GL_QUADS, 0, 4);
+    glPopMatrix();
+   
 }
 
 void sprite2Update(Sprite2 *self){

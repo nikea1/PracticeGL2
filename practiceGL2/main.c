@@ -21,6 +21,11 @@ void processNormalKeys(unsigned char ch, int xx, int yy){
             
             exit(0);
             break;
+        case GLUT_KEY_LEFT:
+            break;
+            
+        case GLUT_KEY_RIGHT:
+            break;
             
             
     }

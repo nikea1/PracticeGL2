@@ -30,10 +30,10 @@ typedef struct{
 
 //vertex data for a square {(x,y,x), (u,v)}
 VertexData vertices[] = {
-    {{  0.0f,   0.0f, 0.0f}, {0.0, 0.0}},
-    {{  0.0f, 100.0f, 0.0f}, {0.0, 1.0}},
-    {{100.0f, 100.0f, 0.0f}, {1.0, 1.0}},
-    {{100.0f,   0.0f, 0.0f}, {1.0, 0.0}}
+    {{ -50.0f, -50.0f, 0.0f}, {0.0, 0.0}},
+    {{ -50.0f, 50.0f, 0.0f}, {0.0, 1.0}},
+    {{50.0f, 50.0f, 0.0f}, {1.0, 1.0}},
+    {{50.0f,   -50.0f, 0.0f}, {1.0, 0.0}}
 };
 
 //load image into texture
@@ -63,7 +63,7 @@ GLuint loadAndBufferImage(const char *filename){
 }
 
 void gamewindowUpdate(){
-    monster->update();
+    //monster->update();
 }
 
 //rendering function
@@ -73,13 +73,26 @@ void gamewindowRender(){
     //Draw your stuff here
     //Note: (0,0) is center of window
     //without adjustments to view window
-    //glColor3f(1.0f, 0.0f, 0.0f);
+   /*
+    glColor3f(1.0f, 0.0f, 0.0f);
     
     
+    glLoadIdentity();
     
     //glDrawArrays(GL_QUADS, 0, 4);
+    glBegin(GL_QUADS);
+    glVertex2f(0.0f, 0.0f);
+    glVertex2f(0.0f, display_height);
+    glVertex2f(display_width, display_height);
+    glVertex2f(display_width, 0.0f);
+    glEnd();
     
-    /*
+    glPushMatrix();
+    //glMatrixMode(GL_MODELVIEW);
+    glRotatef(30.0, 0.0f, 0.0f, 1.0f);
+    
+    
+    glColor3f(1.0f, 1.0f, 0.0f);
     //can color individual points with this
     glBegin(GL_QUADS);
     glVertex2f(0.0f, 0.0f);
@@ -87,7 +100,19 @@ void gamewindowRender(){
     glVertex2f(100.0f, 100.0f);
     glVertex2f(100.0f, 0.0f);
     glEnd();
+    glPopMatrix();
     */
+    
+    
+     //glPushMatrix();
+     
+     //glTranslatef(xcenter, ycenter, 0);
+     //glRotatef(10.0, 0.0, 0.0, 1.0);
+     //glTranslatef(-xcenter, -ycenter, 0);
+     
+     //glPopMatrix();
+    
+    
     //End of drawing
     
     //monster2->render();
@@ -123,6 +148,7 @@ GameWindow *initGameWindow(){
     //clears the screen with white background
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     
+    //allows textures
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -142,25 +168,12 @@ GameWindow *initGameWindow(){
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, sizeof(VertexData), (GLvoid *)offsetof(VertexData, pos));
     
+    //enables texture array
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glTexCoordPointer(2, GL_FLOAT, sizeof(VertexData), (GLvoid *)offsetof(VertexData, tex));
     
     _GWtextureBufferID = loadAndBufferImage("testA.bmp");
-    /*
-    Vector2 monsterPosition;
-    monsterPosition.x = 0;
-    monsterPosition.y = 0;
-    monster = initSprite(_GWtextureBufferID, monsterPosition);
-    monster->setVelocity(makeVector(0.0f, 0.0f));
-    */
-    
-    /*
-    Vector2 monPos;
-    monPos.x = 20;
-    monPos.y = 20;
-    monster2 = initSprite2(_GWtextureBufferID, monPos);
-    monster2->_Velocity = makeVector(0.1f, 0.1f);
-    */
+
     
     Vector2 monPos;
     monPos.x = 210;
