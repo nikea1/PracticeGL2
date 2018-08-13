@@ -9,6 +9,7 @@
 #include "glbmp.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
 glBMP initGLBMP(const char* input){
     //check if string is right
@@ -26,7 +27,9 @@ glBMP initGLBMP(const char* input){
     //open file
     fp = fopen(input,"rb");
     if(fp == NULL){
+        
         printf("File failed to open\n");
+        printf("Error No. %d\n", errno);
         exit(EXIT_FAILURE);
     }
     
