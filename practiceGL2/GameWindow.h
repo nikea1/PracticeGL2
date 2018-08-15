@@ -19,12 +19,13 @@
 
 extern int display_width;
 extern int display_height;
-
 typedef struct {
     void (*render)(void);
     void (*update)(void);
 }GameWindow;
 
+int getMonsterLvl(void);
+void setMonsterLvl(int lvl);
 GameWindow *initGameWindow(void);
 void destroyGameWindow(GameWindow *gw);
 #endif /* GameWindow_h */

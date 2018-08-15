@@ -34,10 +34,10 @@ typedef struct{
 
 //vertex data for a square {(x,y,x), (u,v)}
 VertexData vertices[] = {
-    {{ -50.0f,-50.0f, 0.0f}, {1.0/3 + 0.0, 0*1.0/2 + 0.0}},
-    {{ -50.0f, 50.0f, 0.0f}, {1.0/3 + 0.0, 0*1.0/2 + 1.0/2}},
-    {{  50.0f, 50.0f, 0.0f}, {1.0/3 + 1.0/3, 0*1.0/2 + 1.0/2}},
-    {{  50.0f,-50.0f, 0.0f}, {1.0/3 + 1.0/3, 0*1.0/2 + 0.0}}
+    {{ -50.0f,-50.0f, 0.0f}, {1.0/3 + 0.0, 1.0 * 1.0/2 + 0.0}},
+    {{ -50.0f, 50.0f, 0.0f}, {1.0/3 + 0.0, 1.0 * 1.0/2 + 1.0/2}},
+    {{  50.0f, 50.0f, 0.0f}, {1.0/3 + 1.0/3, 1.0 * 1.0/2 + 1.0/2}},
+    {{  50.0f,-50.0f, 0.0f}, {1.0/3 + 1.0/3, 1.0 * 1.0/2 + 0.0}}
 };
 
 //======================================================================
@@ -62,17 +62,6 @@ GLuint setTexture(){
 }
 //update texture
 void updateTexture(const char* filename){
-   /* glBMP img = initGLBMP(filename);
-    if(img.hasAlpha){
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img.width, img.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, img.pixelData);
-        
-    }
-    else
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.width, img.height, 0, GL_BGR, GL_UNSIGNED_BYTE, img.pixelData);
-    
-    free(img.pixelData);*/
-    
-    
 }
 
 //load image into texture
@@ -130,14 +119,14 @@ void gamewindowUpdate(){
         
         glBindBuffer(GL_ARRAY_BUFFER, _GWvertexBufferID);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
-        printf("hi\n");
+        //printf("hi\n");
         timer = 100;
         x_num += sign;
         if(x_num == 2 || x_num == 0){
             sign *= -1;
         }
     }
-    printf("%i\n", timer);
+    //printf("%i\n", timer);
     timer--;
 }
 
@@ -259,6 +248,14 @@ GameWindow *initGameWindow(){
     monster3->sprite->_Velocity = makeVector(0.5f, 0.0f);
     monster3->_boundingbox = makeBoundingBox(display_height, 0, 0, display_width);
     return gw;
+}
+
+int getMonsterLvl(void){
+    return y_num;
+}
+
+void setMonsterLvl(int lvl){
+    y_num = lvl;
 }
 
 //destroy struct

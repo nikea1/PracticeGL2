@@ -14,20 +14,43 @@
 
 GameWindow *gw;
 
-void processNormalKeys(unsigned char ch, int xx, int yy){
-    switch(ch){
-        case 27:
-            destroyGameWindow(gw);
-            
-            exit(0);
-            break;
+void processSpecialKeys(unsigned char ch, int xx, int yy){
+    int check;
+    check = getMonsterLvl();
+    printf("check is: %d\n", check);
+    switch (ch) {
         case GLUT_KEY_LEFT:
             break;
             
         case GLUT_KEY_RIGHT:
             break;
             
+        case GLUT_KEY_UP:
+            if(check < 1)
+                check++;
+                printf("check is: %d\n", check);
+                setMonsterLvl(check);
+            break;
             
+        case GLUT_KEY_DOWN:
+            if(check > 0)
+                check--;
+                printf("check is: %d\n", check);
+                setMonsterLvl(check);
+            break;
+            
+        default:
+            break;
+    }
+}
+void processNormalKeys(unsigned char ch, int xx, int yy){
+    
+    switch(ch){
+        case 27:
+            destroyGameWindow(gw);
+            
+            exit(0);
+            break;
     }
 }
 
@@ -50,6 +73,8 @@ int main(int argc, const char * argv[]) {
     glutIdleFunc(*(gw->render));
     //define button commands
     glutKeyboardFunc(processNormalKeys);
+    glutSpecialUpFunc(processSpecialKeys);
+    
     printf("Hello, World!\n");
     
     //run glut loop
