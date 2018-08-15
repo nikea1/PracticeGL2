@@ -12,8 +12,20 @@
 #include "Sprite2.h"
 #include "Pet.h"
 
- int display_width = SCREEN_WIDTH*MODIFIER;
- int display_height = SCREEN_HEIGHT*MODIFIER;
+#define IDLE 0
+#define HAPPY 1
+#define ANGRY 2
+#define SLEEP 3
+#define EAT 4
+#define ATTACK 5
+#define HURT 6
+
+int monster_state;
+int old_monster_state;
+int change;
+
+int display_width = SCREEN_WIDTH*MODIFIER;
+int display_height = SCREEN_HEIGHT*MODIFIER;
 
 GLuint _GWtextureBufferID;
 GLuint _GWvertexBufferID;
@@ -21,8 +33,8 @@ Sprite *monster;
 Sprite2 *monster2;
 Pet *monster3;
 int timer = 100;
-int x_num = 1;
-int y_num = 1;
+int x_num = 0;
+int y_num = 0;
 int sign = 1;
 
 
@@ -34,10 +46,10 @@ typedef struct{
 
 //vertex data for a square {(x,y,x), (u,v)}
 VertexData vertices[] = {
-    {{ -50.0f,-50.0f, 0.0f}, {1.0/3 + 0.0, 1.0 * 1.0/2 + 0.0}},
-    {{ -50.0f, 50.0f, 0.0f}, {1.0/3 + 0.0, 1.0 * 1.0/2 + 1.0/2}},
-    {{  50.0f, 50.0f, 0.0f}, {1.0/3 + 1.0/3, 1.0 * 1.0/2 + 1.0/2}},
-    {{  50.0f,-50.0f, 0.0f}, {1.0/3 + 1.0/3, 1.0 * 1.0/2 + 0.0}}
+    {{ -50.0f,-50.0f, 0.0f}, {1.0/8 + 0.0, 0.0 * 1.0/6 + 0.0}},
+    {{ -50.0f, 50.0f, 0.0f}, {1.0/8 + 0.0, 0.0 * 1.0/6 + 1.0/6}},
+    {{  50.0f, 50.0f, 0.0f}, {1.0/8 + 1.0/8, 0.0 * 1.0/6 + 1.0/6}},
+    {{  50.0f,-50.0f, 0.0f}, {1.0/8 + 1.0/8, 0.0 * 1.0/6 + 0.0}}
 };
 
 //======================================================================
@@ -99,35 +111,85 @@ GLuint loadAndBufferImage(const char *filename){
 
 void gamewindowUpdate(){
     
-    
-    
-    if(timer == 0){
-        //determine what frame to pick from sheet
-        //x_num picks the frame row
-        //(0,0)
-        vertices[0].tex[0] = x_num*1.0/3.0 + 0.0;
-        vertices[0].tex[1] = y_num*1.0/2.0 + 0.0;
-        
-        vertices[1].tex[0] = x_num*1.0/3.0 + 0.0;
-        vertices[1].tex[1] = y_num*1.0/2.0 + 1.0/2.0;
-        
-        vertices[2].tex[0] = x_num*1.0/3.0 + 1.0/3.0;
-        vertices[2].tex[1] = y_num*1.0/2.0 + 1.0/2.0;
-                              
-        vertices[3].tex[0] = x_num*1.0/3.0 + 1.0/3.0;
-        vertices[3].tex[1] = y_num*1.0/2.0 + 0.0;
-        
-        glBindBuffer(GL_ARRAY_BUFFER, _GWvertexBufferID);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
-        //printf("hi\n");
-        timer = 100;
-        x_num += sign;
-        if(x_num == 2 || x_num == 0){
-            sign *= -1;
-        }
-    }
-    //printf("%i\n", timer);
-    timer--;
+   
+            if(timer == 0){
+                //determine what frame to pick from sheet
+                //x_num picks the frame row
+                //(0,0)
+                vertices[0].tex[0] = x_num*1.0/8.0 + 0.0;
+                vertices[0].tex[1] = y_num*1.0/6.0 + 0.0;
+                
+                vertices[1].tex[0] = x_num*1.0/8.0 + 0.0;
+                vertices[1].tex[1] = y_num*1.0/6.0 + 1.0/6.0;
+                
+                vertices[2].tex[0] = x_num*1.0/8.0 + 1.0/8.0;
+                vertices[2].tex[1] = y_num*1.0/6.0 + 1.0/6.0;
+                
+                vertices[3].tex[0] = x_num*1.0/8.0 + 1.0/8.0;
+                vertices[3].tex[1] = y_num*1.0/6.0 + 0.0;
+                
+                glBindBuffer(GL_ARRAY_BUFFER, _GWvertexBufferID);
+                glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+                //printf("hi\n");
+                timer = 100;
+                if(change && monster_state != IDLE){
+                    monster3->sprite->_Velocity = makeVector(0.0f, 0.0f);
+                    monster3->sprite->_Position = makeVector(210, 120);
+                    change = 0;
+                }
+                else if(change && monster_state == IDLE){
+                    monster3->sprite->_Velocity = makeVector(0.5f, 0.0f);
+                    change = 0;
+                }
+                //printf("State is %d", monster_state);
+                switch (monster_state) {
+                    case IDLE:
+                        if(x_num == 1)
+                            x_num = 0;
+                        else x_num = 1;
+                    break;
+                   
+                    case HAPPY:
+                        
+                        if(x_num == 1)
+                            x_num = 4;
+                        else x_num = 1;
+                    break;
+                        
+                    case ANGRY:
+                        if(x_num == 1)
+                            x_num = 5;
+                        else x_num = 1;
+                    break;
+                     
+                    case SLEEP:
+                        x_num = 3;
+                    break;
+                    
+                    case EAT:
+                        if(x_num == 1)
+                            x_num = 2;
+                        else x_num = 1;
+                    break;
+                        
+                    case ATTACK:
+                        if(x_num == 1)
+                            x_num = 6;
+                        else x_num = 1;
+                    break;
+                    case HURT:
+                        x_num = 7;
+                    break;
+                    
+                    default:
+                        x_num = 1;
+                        monster_state = IDLE;
+                    break;
+                        /**/
+                }
+            //printf("%i\n", timer);
+            
+            }timer--;
 }
 
 //rendering function
@@ -238,9 +300,12 @@ GameWindow *initGameWindow(){
     glTexCoordPointer(2, GL_FLOAT, sizeof(VertexData), (GLvoid *)offsetof(VertexData, tex));
     
     //define image texture
-    _GWtextureBufferID = loadAndBufferImage("anitest2.bmp");
+    _GWtextureBufferID = loadAndBufferImage("testsheet.bmp");
 
     //define pet object
+    monster_state = IDLE;
+    old_monster_state = IDLE;
+    change = 0;
     Vector2 monPos;
     monPos.x = 210;
     monPos.y = 120;
@@ -256,6 +321,16 @@ int getMonsterLvl(void){
 
 void setMonsterLvl(int lvl){
     y_num = lvl;
+}
+
+int getMonsterState(void){
+    return monster_state;
+}
+
+void setMonsterState(int state){
+    old_monster_state = monster_state;
+    monster_state = state;
+    change = 1;
 }
 
 //destroy struct

@@ -16,27 +16,40 @@ GameWindow *gw;
 
 void processSpecialKeys(unsigned char ch, int xx, int yy){
     int check;
+    int state;
     check = getMonsterLvl();
+    state = getMonsterState();
     printf("check is: %d\n", check);
+    
     switch (ch) {
         case GLUT_KEY_LEFT:
+            if(state > 0){
+                state--;
+                setMonsterState(state);
+            }
             break;
             
         case GLUT_KEY_RIGHT:
+            if(state < 7){
+                state++;
+                setMonsterState(state);
+            }
             break;
             
         case GLUT_KEY_UP:
-            if(check < 1)
+            if(check < 5){
                 check++;
                 printf("check is: %d\n", check);
                 setMonsterLvl(check);
+            }
             break;
             
         case GLUT_KEY_DOWN:
-            if(check > 0)
+            if(check > 0){
                 check--;
                 printf("check is: %d\n", check);
                 setMonsterLvl(check);
+            }
             break;
             
         default:

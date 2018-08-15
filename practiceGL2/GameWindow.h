@@ -26,6 +26,8 @@ typedef struct {
 
 int getMonsterLvl(void);
 void setMonsterLvl(int lvl);
+int getMonsterState(void);
+void setMonsterState(int state);
 GameWindow *initGameWindow(void);
 void destroyGameWindow(GameWindow *gw);
 #endif /* GameWindow_h */

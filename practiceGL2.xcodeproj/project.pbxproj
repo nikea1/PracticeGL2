@@ -14,6 +14,7 @@
 		52573A6A2043EA7700C9EBBE /* BoundingBox.c in Sources */ = {isa = PBXBuildFile; fileRef = 52573A682043EA7700C9EBBE /* BoundingBox.c */; };
 		52573A6D2043F45C00C9EBBE /* Pet.c in Sources */ = {isa = PBXBuildFile; fileRef = 52573A6B2043F45C00C9EBBE /* Pet.c */; };
 		52760E622044DD7600750110 /* Sprite2.c in Sources */ = {isa = PBXBuildFile; fileRef = 52760E602044DD7600750110 /* Sprite2.c */; };
+		52797E192123E129007441CF /* testsheet.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 52797E182123E0FC007441CF /* testsheet.bmp */; };
 		527FFC47210546FB00142AEA /* anitest.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 527FFC46210546DE00142AEA /* anitest.bmp */; };
 		527FFC622105D38000142AEA /* anitest2.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 527FFC612105CA6900142AEA /* anitest2.bmp */; };
 		52A65DDE203F859F00ECF222 /* glbmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 52A65DDD203F859F00ECF222 /* glbmp.c */; };
@@ -28,6 +29,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				52797E192123E129007441CF /* testsheet.bmp in CopyFiles */,
 				527FFC622105D38000142AEA /* anitest2.bmp in CopyFiles */,
 				527FFC47210546FB00142AEA /* anitest.bmp in CopyFiles */,
 				52A65DE2203FEBE100ECF222 /* testA.bmp in CopyFiles */,
@@ -54,6 +56,7 @@
 		52573A6C2043F45C00C9EBBE /* Pet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pet.h; sourceTree = "<group>"; };
 		52760E602044DD7600750110 /* Sprite2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Sprite2.c; sourceTree = "<group>"; };
 		52760E612044DD7600750110 /* Sprite2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sprite2.h; sourceTree = "<group>"; };
+		52797E182123E0FC007441CF /* testsheet.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = testsheet.bmp; path = ../../testsheet.bmp; sourceTree = "<group>"; };
 		527FFC46210546DE00142AEA /* anitest.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = anitest.bmp; sourceTree = "<group>"; };
 		527FFC612105CA6900142AEA /* anitest2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = anitest2.bmp; path = ../../anitest2.bmp; sourceTree = "<group>"; };
 		52A65DDC203F859E00ECF222 /* glbmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glbmp.h; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				52A65DDF203FC78C00ECF222 /* alpha.bmp */,
+				52797E182123E0FC007441CF /* testsheet.bmp */,
 				527FFC46210546DE00142AEA /* anitest.bmp */,
 				527FFC612105CA6900142AEA /* anitest2.bmp */,
 				521A32B21F9C0B8C0035C4B3 /* testA.bmp */,
